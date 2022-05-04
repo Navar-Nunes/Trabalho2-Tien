@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Google Icons + Symbols -->
+    <link rel="stylesheet"
+        href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+
+    <title>Trabalho 2 - G3 e G4</title>
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL'0,
+                'wght'400,
+                'GRAD'0,
+                'opsz'48
+        }
+
+        /* Header */
+        header {
+            width: 100vw;
+            height: 10vh;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: bisque;
+        }
+
+        .header-section-title {
+            font-size: 24px;
+        }
+
+        /* Main */
+        main {
+            display: flex;
+            align-items: center;
+            width: 60vw;
+            height: 90vh;
+        }
+
+
+        /* Main Cntainer */
+        .main-container {
+            width: 90%;
+            height: 80%;
+            background-color: #bdbdbd;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container-user {
+            width: 60%;
+            height: 20%;
+            background-color: #fff;
+            border-radius: 40px;
+            margin-bottom: 1%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container-user-input {
+            width: 60%;
+            height: 25%;
+            border-radius: 10px 0px 0px 10px;
+            border: 1px solid #c4c4c4;
+            outline: none;
+            text-align: center;
+        }
+
+        .main-container-user-button {
+            min-width: 10%;
+            min-height: 25%;
+            padding: 1.3% 20px;
+            border-radius: 0px 10px 10px 0px;
+            border: 1px solid #c4c4c4;
+            background-color: #c4c4c4;
+            user-select: none;
+        }
+
+        .main-container-droptable {
+            width: 60%;
+            height: 60%;
+            background-color: #fff;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container-droptable-input {
+            width: 70%;
+            height: 70%;
+            border-radius: 10px;
+            border: 1px solid #c4c4c4;
+            text-align: center;
+            outline: none;
+        }
+
+
+        /* Sides */
+        .main-side-container {
+            width: 5%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .main-side-container-arrows {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #c4c4c4;
+            font-size: 36px;
+            border-radius: 100%;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.3s linear;
+            user-select: none;
+        }
+
+        .main-side-container-arrows:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body onload="onLoadPage()">
+    <header>
+        <section class="header-section">
+            <h1 class="header-section-title">Trabalho 2 - G3 e G4</h1>
+        </section>
+
+    </header>
+    <main>
+        <div class="main-side-container" onclick="goToPreviousSlide()">
+            <span class="material-symbols-outlined main-side-container-arrows">
+                chevron_left
+            </span>
+        </div>
+        <section class="main-container">
+            <div class="main-container-user">
+                <input class="main-container-user-input" type="text">
+                <button class="main-container-user-button">Enviar</button>
+            </div>
+            <div class="main-container-droptable">
+                <input class="main-container-droptable-input" type="text" readonly="readonly">
+            </div>
+        </section>
+        <div class="main-side-container" onclick="goToNextSlide()">
+            <span class="material-symbols-outlined main-side-container-arrows">
+                chevron_right
+            </span>
+        </div>
+    </main>
+
+
+    <script type="text/javascript">
+        let currentSlide = 0
+
+        let Content = ["One", "Two", "Three"]
+
+        function onLoadPage() {
+            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+            currentSlide = 0;
+            dropTableInput.value = Content[0];
+        }
+
+
+        function goToPreviousSlide() {
+            currentSlide = currentSlide - 1;
+            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+            console.log(currentSlide)
+
+            switch (currentSlide) {
+                case 0:
+                    dropTableInput.value = Content[0]
+                    break
+                case 1:
+                    dropTableInput.value = Content[1]
+                    break
+                case 2:
+                    dropTableInput.value = Content[2]
+                    break
+                default:
+                    alert("Você já chegou no número 1!")
+                    break
+            }
+
+        }
+
+        function goToNextSlide() {
+            currentSlide = currentSlide + 1;
+            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+            console.log(currentSlide)
+
+            switch (currentSlide) {
+                case 0:
+                    dropTableInput.value = Content[0]
+                    break
+                case 1:
+                    dropTableInput.value = Content[1]
+                    break
+                case 2:
+                    dropTableInput.value = Content[2]
+                    break
+                default:
+                    alert("Você já chegou no ultimo número!")
+                    break
+            }
+
+        }
+    </script>
+</body>
+
+</html>
