@@ -145,9 +145,23 @@
             align-items: center;
         }
 
-        .main-container-droptable-input {
-            width: 70%;
+        .main-container-droptable-title {
+            margin-bottom: 15px;
+        }
+
+        .main-container-droptable-iterativo,
+        .main-container-droptable-recursivo {
             height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container-droptable-iterativo-input,
+        .main-container-droptable-recursivo-input {
+            width: 90%;
+            height: 50%;
             border-radius: 10px;
             border: 1px solid #c4c4c4;
             text-align: center;
@@ -204,7 +218,15 @@
                 <button class="main-container-user-button" onclick="Questão1()">Enviar</button>
             </div>
             <div class="main-container-droptable">
-                <input class="main-container-droptable-input" type="text" readonly="readonly">
+                <div class="main-container-droptable-iterativo">
+                    <h1 class="main-container-droptable-title">Iterativo</h1>
+                    <input class="main-container-droptable-iterativo-input" type="text" readonly="readonly">
+                </div>
+                <div class="main-container-droptable-recursivo">
+                    <h1 class="main-container-droptable-title">Recursivo</h1>
+                    <input class="main-container-droptable-recursivo-input" type="text" readonly="readonly">
+                </div>
+
             </div>
         </section>
         <div class="main-side-container" onclick="goToNextSlide()">
@@ -350,7 +372,8 @@
             let contadorIterativo = 0;
             let contadorRecursivo = 0;
             const numero = document.getElementById("questao1").value
-            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+            const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
+            const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
 
             function Iterativo() {
                 let aux = parseInt(numero);
@@ -374,7 +397,8 @@
             Iterativo()
             Recursivo()
 
-            dropTableInput.value = `Possui ${contadorIterativo} caracteres!`
+            dropTableInputIterativo.value = `Possui ${contadorIterativo} caracteres!`
+            dropTableInputRecursivo.value = `Possui ${contadorRecursivo} caracteres!`
         }
 
         function Questão5() {
