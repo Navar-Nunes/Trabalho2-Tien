@@ -180,8 +180,8 @@
         </div>
         <section class="main-container">
             <div class="main-container-user">
-                <input class="main-container-user-input" type="text">
-                <button class="main-container-user-button">Enviar</button>
+                <input id="questao1" class="main-container-user-input" type="text">
+                <button class="main-container-user-button" onclick="Questão1()">Enviar</button>
             </div>
             <div class="main-container-droptable">
                 <input class="main-container-droptable-input" type="text" readonly="readonly">
@@ -198,29 +198,35 @@
     <script type="text/javascript">
         let currentSlide = 0
 
-        let Content = ["One", "Two", "Three"]
+        let Content = [`
+            <input id="questao1" class="main-container-user-input" type="text">
+            <button class="main-container-user-button" onclick="Questão1()">Enviar</button>`,
+            `
+            <input id="questao2" class="main-container-user-input" type="text">
+            <button class="main-container-user-button" onclick="Questão2()">Enviar</button>`,
+            `
+            <input id="questao3" class="main-container-user-input" type="text">
+            <button class="main-container-user-button" onclick="Questão1()">Enviar</button>`]
 
         function onLoadPage() {
-            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+            // const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
             currentSlide = 0;
-            dropTableInput.value = Content[0];
+            // dropTableInput.value = Content[0];
         }
-
 
         function goToPreviousSlide() {
             currentSlide = currentSlide - 1;
-            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
-            console.log(currentSlide)
+            const userSection = document.getElementsByClassName("main-container-user")[0]
 
             switch (currentSlide) {
                 case 0:
-                    dropTableInput.value = Content[0]
+                    userSection.innerHTML = Content[0]
                     break
                 case 1:
-                    dropTableInput.value = Content[1]
+                    userSection.innerHTML = Content[1]
                     break
                 case 2:
-                    dropTableInput.value = Content[2]
+                    userSection.innerHTML = Content[2]
                     break
                 default:
                     alert("Você já chegou no número 1!")
@@ -249,6 +255,64 @@
                     alert("Você já chegou no ultimo número!")
                     currentSlide = 2
                     break
+            }
+
+        }
+
+
+        function Questão1() {
+            let contadorIterativo = 0;
+            let contadorRecursivo = 0;
+            const numero = document.getElementById("questao1").value
+            const dropTableInput = document.getElementsByClassName("main-container-droptable-input")[0]
+
+            function Iterativo() {
+                let aux = parseInt(numero);
+
+                while(aux>1) {
+                    aux = aux/10;
+                    contadorIterativo++; 
+                } 
+            }
+
+            let aux = parseInt(numero);
+            function Recursivo() {
+                
+                if (aux>1) {
+                    aux = aux/10;
+                    contadorRecursivo++; 
+                    Recursivo();
+                } 
+            }
+
+            Iterativo()
+            Recursivo()
+
+            dropTableInput.value = contadorIterativo
+        }
+
+        function Questão5(){
+            
+            function NumPrimIter(num){
+                const Num = document.getElementsByClassName("main-container-droptable-input")[0]
+                let i,qnt=0;
+                
+                for(i=0;i<num;i++)
+                    if(num%i==0)
+                        qnt++;
+
+                if(qnt>=2)
+                    return Num.value = 1;
+                else
+                    return Num.value = 0;
+            }
+
+            function NumPrimRec(num){
+                let i;
+                if(num==0)
+                    return 1.0;
+                else 
+                    return NumPrimRec(num%i);
             }
 
         }
