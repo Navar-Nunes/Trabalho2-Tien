@@ -255,7 +255,7 @@
             `
             <h1 class="main-container-user-title">Questão 2</h1>
             <div class="row">
-                <input id="questao2" class="main-container-user-input" type="text" placeholder="">
+                <input id="questao2" class="main-container-user-input" type="text" placeholder="Posicionamento dos dígitos">
                 <button class="main-container-user-button" onclick="Questão2()">Enviar</button>
             </div>`,
             `
@@ -405,6 +405,40 @@
 
             dropTableInputIterativo.value = `Possui ${contadorIterativo} caracteres!`
             dropTableInputRecursivo.value = `Possui ${contadorRecursivo} caracteres!`
+        }
+
+        function Questão2() {
+
+            let valorIterativo = [];
+            let valorRecursivo = [];
+            const numero = document.getElementById("questao2").value
+            const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
+            const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
+
+            num = parseInt(numero).toString();
+
+            function Iterativo() {
+                for (i= num.length;i > 0; --i){
+                    valorIterativo.push(num[num.length-i].toString() + " P="+(i-1).toString())    
+                }
+            }
+
+
+            j = parseInt(numero).toString().length
+            function Recursivo() {
+                if (j > 0){
+                    valorRecursivo.push(num[num.length-j].toString() + " P="+(j-1).toString())
+                    j-=1;
+                    return Recursivo()
+                }
+            }
+
+            Iterativo()
+            Recursivo()
+            //Precisa Ajustar, no momento esta apenas escrevendo o array
+            //algum tipo de foreach
+            dropTableInputIterativo.value = `${valorIterativo}`;
+            dropTableInputRecursivo.value = `${valorRecursivo}`;
         }
 
         function Questão5() {
