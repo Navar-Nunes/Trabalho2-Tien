@@ -261,7 +261,7 @@
             `
             <h1 class="main-container-user-title">Questão 3</h1>
             <div class="row">
-                <input id="questao3" class="main-container-user-input" type="text" placeholder="">
+                <input id="questao3" class="main-container-user-input" type="text" placeholder="Soma de Quadrados">
                 <button class="main-container-user-button" onclick="Questão3()">Enviar</button>
             </div>`,
             `
@@ -439,6 +439,38 @@
             //algum tipo de foreach
             dropTableInputIterativo.value = `${valorIterativo}`;
             dropTableInputRecursivo.value = `${valorRecursivo}`;
+        }
+
+        function Questão3() {
+            let contadorIterativo = 0;
+            let contadorRecursivo = 0;
+            const numero = document.getElementById("questao3").value
+            const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
+            const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
+
+            function Iterativo() {
+                let aux = parseInt(numero);
+
+                for (let i = 1; i <= aux; i++) {
+                    contadorIterativo += i**2;
+                }
+            }
+
+            let aux = parseInt(numero);
+            function Recursivo() {
+                if (aux >= 1 ){
+                    contadorRecursivo += aux**2;
+                    aux -=1;
+                    Recursivo()
+                }
+
+            }
+
+            Iterativo()
+            Recursivo()
+
+            dropTableInputIterativo.value = `A soma dos quadrados eh ${contadorIterativo}!`
+            dropTableInputRecursivo.value = `A soma dos quadrados eh ${contadorRecursivo}!`
         }
 
         function Questão5() {
