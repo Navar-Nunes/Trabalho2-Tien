@@ -495,65 +495,54 @@
                 return alert("Você só pode inserir no máximo 6 digitos")
             }
 
-            function Iterativo(n) {
+            aux = parseInt(numero).toString()
+            numerosPares = []
 
-                let numerosPares = [];
-
-                for (let i = 0; i < n; i++) {
-                    if ((i % 2) == 0) {
-                        numerosPares.push(i)
-                    }
+            for (i = 0; i < aux.length; ++i) {
+                if(aux[i] % 2 == 0){
+                    numerosPares.push(parseInt(aux[i]))
                 }
+            }
+
+            function Iterativo() {
 
                 let produtoCubos = 0;
 
-                // (a + b) pelo fator (a2 – ab + b2).
                 // Produto dos cubos
-                for (let i = 0; i < numerosPares.length - 1; i++) {
-                    formula = (numerosPares[i] + numerosPares[i + 1]) * ((Math.pow(numerosPares[i], 2)) - (numerosPares[i] * numerosPares[i + 1]) + (Math.pow(numerosPares[i + 1], 2)));
-                    produtoCubos += formula;
+                for (let i = 0; i < numerosPares.length; i++) {
+                    
+                    if(i == 0){
+                        produtoCubos = numerosPares[i]**3
+                    }
+                    else{
+                        produtoCubos *= numerosPares[i]**3;
+                    }
                 }
 
                 return produtoCubos
             }
 
-            let numerosPares = [];
             let produtoCubosRecursivo = 0;
-            let stage = 1;
-            let cmd = false;
-            let recursivoAnswer = 0;
-
-            function Recursivo(n) {
-
-                if (stage == 1) {
-
-                    if ((n % 2) == 0 && n != numero) {
-                        numerosPares.push(n)
+            let passoRecursivo = 0;
+            function Recursivo() {
+                if (numerosPares.length != 0){
+                    if(passoRecursivo == 0) {
+                        produtoCubosRecursivo = numerosPares[passoRecursivo]**3
+                        passoRecursivo+=1
+                        Recursivo()
                     }
-
-                    if (n < numero) {
-                        Recursivo(n + 1)
+                    if (passoRecursivo < numerosPares.length){
+                        produtoCubosRecursivo *= numerosPares[passoRecursivo]**3
+                        passoRecursivo+=1
+                        Recursivo()
                     }
-
-                    if (n == numero) {
-                        stage = 2;
-                        return Recursivo(0);
-                    }
-
-                } else if (stage == 2) {
-
-                    if (n < numerosPares.length - 1) {
-                        formula = (numerosPares[n] + numerosPares[n + 1]) * ((Math.pow(numerosPares[n], 2)) - (numerosPares[n] * numerosPares[n + 1]) + (Math.pow(numerosPares[n + 1], 2)));
-                        produtoCubosRecursivo += formula;
-                        return Recursivo(n + 1);
-                    }
-                    return recursivoAnswer = produtoCubosRecursivo
                 }
+                
             }
-            Recursivo(0);
+            Recursivo();
 
-            dropTableInputIterativo.value = `O resultado é ${Iterativo(numero)}`;
-            dropTableInputRecursivo.value = `O resultado é ${recursivoAnswer}`;
+            dropTableInputIterativo.value = `O resultado é ${Iterativo()}`;
+            dropTableInputRecursivo.value = `O resultado é ${produtoCubosRecursivo}`;
 
             // O programa precisa percorrer até 6 digitos, ele no momento só funciona até 4 digitos
         }
