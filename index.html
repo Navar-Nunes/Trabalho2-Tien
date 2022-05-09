@@ -301,8 +301,11 @@
             </div>`,
             `
             <h1 class="main-container-user-title">Questão 8</h1>
+                <span class="main-container-user-content">Retorna o índice da n-ésima ocorrência do
+                valor no vetor</span>
+                <span class="main-container-user-content">Vetor(separados por virgula) Número De Ocorrências Número</span>
             <div class="row">
-                <input id="questao8" class="main-container-user-input" type="text" placeholder="">
+                <input id="questao8" class="main-container-user-input" type="text" placeholder="Exemplo: 1,3,4,5,6,7 4 6">
                 <button class="main-container-user-button" onclick="Questão8()">Enviar</button>
             </div>`,]
 
@@ -499,7 +502,7 @@
             numerosPares = []
 
             for (i = 0; i < aux.length; ++i) {
-                if(aux[i] % 2 == 0){
+                if (aux[i] % 2 == 0) {
                     numerosPares.push(parseInt(aux[i]))
                 }
             }
@@ -510,12 +513,12 @@
 
                 // Produto dos cubos
                 for (let i = 0; i < numerosPares.length; i++) {
-                    
-                    if(i == 0){
-                        produtoCubos = numerosPares[i]**3
+
+                    if (i == 0) {
+                        produtoCubos = numerosPares[i] ** 3
                     }
-                    else{
-                        produtoCubos *= numerosPares[i]**3;
+                    else {
+                        produtoCubos *= numerosPares[i] ** 3;
                     }
                 }
 
@@ -525,19 +528,19 @@
             let produtoCubosRecursivo = 0;
             let passoRecursivo = 0;
             function Recursivo() {
-                if (numerosPares.length != 0){
-                    if(passoRecursivo == 0) {
-                        produtoCubosRecursivo = numerosPares[passoRecursivo]**3
-                        passoRecursivo+=1
+                if (numerosPares.length != 0) {
+                    if (passoRecursivo == 0) {
+                        produtoCubosRecursivo = numerosPares[passoRecursivo] ** 3
+                        passoRecursivo += 1
                         Recursivo()
                     }
-                    if (passoRecursivo < numerosPares.length){
-                        produtoCubosRecursivo *= numerosPares[passoRecursivo]**3
-                        passoRecursivo+=1
+                    if (passoRecursivo < numerosPares.length) {
+                        produtoCubosRecursivo *= numerosPares[passoRecursivo] ** 3
+                        passoRecursivo += 1
                         Recursivo()
                     }
                 }
-                
+
             }
             Recursivo();
 
@@ -635,9 +638,44 @@
         }
 
         function Questão8() {
-            // Dado um vetor, e dois valores n e m, retorne o índice da n-ésima ocorrência do
-            // valor m no vetor, a contar do ínicio do vetor. Caso não exista a n-ésima ocorrência de
-            // m, devolva -1.
+            const numero = document.getElementById("questao8").value.split(" ")
+            const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
+            const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
+
+            function Iterativo(vec, ocorr, value) {
+                const vector = vec.split(",")
+                contador = 0;
+
+                // Vetor com no máximo 10 elementos
+                if (vector.length > 10) {
+                    document.getElementById("questao8").value = "";
+                    alert("Insira um vetor com 10 valores no máximo");
+                    return "Erro";
+                }
+
+                // Digitos entre 0 a 9
+                for (let i = 0; i < vector.length; i++) {
+                    if (vector[i] > 9 || vector[i] < 0) {
+                        document.getElementById("questao8").value = "";
+                        alert("Os digitos dentro do vetor precisam estar entre 0 a 9")
+                        return "Erro";
+                    }
+                }
+
+                // Método
+                for (let i = 0; i < vector.length; i++) {
+                    if (vector[i] == value) {
+                        contador += 1;
+                        if (contador == ocorr) {
+                            console.log(i)
+                            return i;
+                        }
+                    }
+                }
+                return -1;
+            }
+
+            dropTableInputIterativo.value = `O indice do vetor para a ocorrência, é ${Iterativo(numero[0], numero[1], numero[2])}`
         }
 
     </script>
