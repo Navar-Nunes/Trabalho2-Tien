@@ -267,7 +267,7 @@
             </div>`,
             `
             <h1 class="main-container-user-title">Questão 3</h1>
-            <span class="main-container-user-content">Revela a soma dos quadrados do número</span>
+            <span class="main-container-user-content">Revela a soma dos quadrados dos dígitos do número</span>
             <div class="row">
                 <input id="questao3" class="main-container-user-input" type="text" placeholder="Insira um número">
                 <button class="main-container-user-button" onclick="Questão3()">Enviar</button>
@@ -303,9 +303,9 @@
             <h1 class="main-container-user-title">Questão 8</h1>
                 <span class="main-container-user-content">Retorna o índice da n-ésima ocorrência do
                 valor no vetor</span>
-                <span class="main-container-user-content">Vetor(separados por virgula) Número De Ocorrências Número</span>
+                <span class="main-container-user-content">Insira primeiro o valor da ocorrência procurada e depois o número a ser buscado</span>
             <div class="row">
-                <input id="questao8" class="main-container-user-input" type="text" placeholder="Exemplo: 1,3,4,5,6,7 4 6">
+                <input id="questao8" class="main-container-user-input" type="text" placeholder="Exemplo: 2 9">
                 <button class="main-container-user-button" onclick="Questão8()">Enviar</button>
             </div>`,]
 
@@ -354,7 +354,7 @@
         function goToNextSlide() {
             currentSlide = currentSlide + 1;
             const userSection = document.getElementsByClassName("main-container-user")[0]
-
+            
             switch (currentSlide) {
                 case 0:
                     userSection.innerHTML = Content[0]
@@ -407,7 +407,7 @@
             let aux = parseInt(numero);
             function Recursivo() {
 
-                if (aux > 1) {
+                if (aux >= 1) {
                     aux = aux / 10;
                     contadorRecursivo++;
                     Recursivo();
@@ -425,15 +425,15 @@
 
             let valorIterativo = [];
             let valorRecursivo = [];
-            const numero = document.getElementById("questao2").value
+            const numero = document.getElementById("questao2").value.split(" ")
             const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
             const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
 
             num = parseInt(numero).toString();
 
             function Iterativo() {
-                for (i = num.length; i > 0; --i) {
-                    valorIterativo.push(num[num.length - i].toString() + " P=" + (i - 1).toString())
+                for (i = num.length; i >= 0; --i) {
+                    valorIterativo.push(num[num.length - i].toString() + " P=" + (i - 1).toString())                   
                 }
             }
 
@@ -641,41 +641,52 @@
             const numero = document.getElementById("questao8").value.split(" ")
             const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
             const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
+            var array = [];
 
-            function Iterativo(vec, ocorr, value) {
-                const vector = vec.split(",")
-                contador = 0;
-
-                // Vetor com no máximo 10 elementos
-                if (vector.length > 10) {
-                    document.getElementById("questao8").value = "";
-                    alert("Insira um vetor com 10 valores no máximo");
-                    return "Erro";
-                }
-
-                // Digitos entre 0 a 9
-                for (let i = 0; i < vector.length; i++) {
-                    if (vector[i] > 9 || vector[i] < 0) {
-                        document.getElementById("questao8").value = "";
-                        alert("Os digitos dentro do vetor precisam estar entre 0 a 9")
-                        return "Erro";
-                    }
-                }
-
-                // Método
-                for (let i = 0; i < vector.length; i++) {
-                    if (vector[i] == value) {
-                        contador += 1;
-                        if (contador == ocorr) {
-                            console.log(i)
-                            return i;
-                        }
-                    }
-                }
-                return -1;
+            function getRandom(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
             }
 
-            dropTableInputIterativo.value = `O indice do vetor para a ocorrência, é ${Iterativo(numero[0], numero[1], numero[2])}`
+            for (let i = 0 ; i < 10 ; i++){
+                array.push(getRandom(0,9));
+            }
+            
+
+            function Iterativo (n, m, array) {
+                let cont=0, i;
+                for(i=0; i<10; i++){
+                    if(array[i]==m){
+                        cont++;
+                    }
+                    if(cont==n){
+                        return i;
+                    }
+                 }
+                return -1
+            }
+
+            function Recursivo(n,m,array,tam,k){
+                if(k>=tam){
+                    return -1;
+                }
+                else if(array[k]==m && n==1){
+                    return k;
+                }
+                else if(array[k]==m && n>1){
+                    return Recursivo(n-1,m,array,tam,k+1);
+                }
+                else{
+                    return Recursivo(n,m,array,tam,k+1);
+                }
+            }
+            
+            
+            
+           dropTableInputIterativo.value = `O índice é ${Iterativo(numero[0], numero[1], array)}`;            
+            dropTableInputRecursivo.value = `O índice é ${Recursivo(numero[0], numero[1], array, 10, 0)}`;
+            
+
+            
         }
 
     </script>
