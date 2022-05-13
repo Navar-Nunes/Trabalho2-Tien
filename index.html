@@ -288,13 +288,14 @@
             </div>`,
             `
             <h1 class="main-container-user-title">Questão 6</h1>
-            <span class="main-container-user-content">Essa questão obtem o Maior Divisor Comum(MDC)</span>
+            <span class="main-container-user-content">Essa questão obtêm o Maior Divisor Comum(MDC)</span>
             <div class="row">
                 <input id="questao6" class="main-container-user-input" type="text" placeholder="Insira 2 números separados por espaço simples">
                 <button class="main-container-user-button" onclick="Questão6()">Enviar</button>
             </div>`,
             `
             <h1 class="main-container-user-title">Questão 7</h1>
+            <span class="main-container-user-content">Calcula o resultado de uma função com a variável X criada pelo usuário</span>
             <div class="row">
                 <input id="questao7" class="main-container-user-input" type="text" placeholder="">
                 <button class="main-container-user-button" onclick="Questão7()">Enviar</button>
@@ -632,50 +633,64 @@
             dropTableInputRecursivo.value = `O MDC é ${Recursivo(numero[0], numero[1])}`
         }
 
-        function Questão7() {
+        function Questão7()
+        {
             // Dada uma funcão calcula(x), obter:
             // somatorio(i = 1, i = n, produtorio(j = i, j = n, calcula(i + j))
         }
 
-        function Questão8() {
+        function Questão8()
+        {
             const numero = document.getElementById("questao8").value.split(" ")
             const dropTableInputIterativo = document.getElementsByClassName("main-container-droptable-iterativo-input")[0]
             const dropTableInputRecursivo = document.getElementsByClassName("main-container-droptable-recursivo-input")[0]
             var array = [];
 
-            function getRandom(min, max) {
+            function getRandom(min, max)
+            {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
 
-            for (let i = 0 ; i < 10 ; i++){
+            for (let i = 0 ; i < 10 ; i++)
+            {
                 array.push(getRandom(0,9));
             }
             
 
-            function Iterativo (n, m, array) {
+            function Iterativo (n, m, array) 
+            {
                 let cont=0, i;
-                for(i=0; i<10; i++){
-                    if(array[i]==m){
+                
+                for(i=0; i<10; i++)
+                {
+                    if(array[i]==m)
+                    {
                         cont++;
                     }
-                    if(cont==n){
+                    if(cont==n)
+                    {
                         return i;
                     }
                  }
                 return -1
             }
 
-            function Recursivo(n,m,array,tam,k){
-                if(k>=tam){
+            function Recursivo(n,m,array,tam,k)
+            {
+                if(k>=tam)
+                {
                     return -1;
                 }
-                else if(array[k]==m && n==1){
+                else if(array[k]==m && n==1)
+                {
                     return k;
                 }
-                else if(array[k]==m && n>1){
+                else if(array[k]==m && n>1)
+                {
                     return Recursivo(n-1,m,array,tam,k+1);
                 }
-                else{
+                else
+                {
                     return Recursivo(n,m,array,tam,k+1);
                 }
             }
